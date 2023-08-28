@@ -9,23 +9,23 @@ export default function App() {
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
 
-  const TotalFeedback = good + neutral + bad;
+  const totalFeedback = good + neutral + bad;
 
   const calcPercentagePositivFeedback = () => {
-    return Math.round((good / TotalFeedback) * 100);
+    return Math.round((good / totalFeedback) * 100);
   };
 
   const onInformationFeedback = option => {
     console.log(option);
     switch (option) {
       case 'good':
-        setGood(good + 1);
+        setGood(prev => prev + 1);
         break;
       case 'neutral':
-        setNeutral(neutral + 1);
+        setNeutral(prev => prev + 1);
         break;
       case 'bad':
-        setBad(bad + 1);
+        setBad(prev => prev + 1);
         break;
       default:
         return;
@@ -41,12 +41,12 @@ export default function App() {
         />
       </Section>
       <Section title={'Statistics'}>
-        {TotalFeedback ? (
+        {totalFeedback ? (
           <Statistics
             good={good}
             neutral={neutral}
             bad={bad}
-            total={TotalFeedback}
+            total={totalFeedback}
             positivePercentage={calcPercentagePositivFeedback()}
           />
         ) : (
